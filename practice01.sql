@@ -19,3 +19,11 @@ SELECT *
 FROM student
 WHERE grade <> 1
 ORDER BY birthday DESC;
+
+-- dept 테이블을 활용하여 아래와 같은 결과를 만드는 쿼리를 작성하세요
+SELECT deptno "부서번호", dname "부서이름", loc "위치"
+FROM dept;
+
+-- professor 테이블을 활용하여 아래와 같은 결과를 만드는 쿼리를 작성하세요
+SELECT NAME || '(' || id || ')' "교수정보" , POSITION, HIREDATE "입사일자" , EMAIL "이메일"
+FROM professor;

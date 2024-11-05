@@ -236,7 +236,7 @@ SELECT
     sal*12+NVL(comm, 0) "연봉" -- null 값을 0으로 설정 
 FROM emp;
 
-
+-- decode
 SELECT 
     DECODE(10, 10, '같다' , '다르다') ,
     DECODE(10, 20, '같다' , 'NULL'),
@@ -263,39 +263,29 @@ SELECT
     , 103 , '소프트웨어' , 'ETC') DNAME, deptno
 FROM professor;
 
+-- grade 뒤에 학년 붙히고 싶을때 
+SELECT grade || '학년' "학년"
+FROM student;
 
---1.
---professor 테이블에서 교수의 이름과 부서번호를 출력하고
---101 번 부서 중에서 이름이 "Audie Murphy" 교수에게 "BEST!" 라고 출력하고
---101번 부서 중에서 이름이 "Audie Murphy" 교수가 아닌 나머지에는 NULL 값을 출력하세요.
---만약 101 번 외 다른 학과에 "Audie Murphy" 교수가 있어도 "BEST!" 가 출력되면 안됩니다.
+SELECT
+grade ,
+DECODE(grade, 1, '저학년' , 2, '저학년' , 3 , '고학년' , 4 , '고학년') "학년"
+FROM student;
 
-SELECT 
-    deptno,
-    name,
-DECODE(deptno, 101 , DECODE(name, 'Audie Murphy', 'BEST!' ) ) "DECODE"
-FROM professor;
-
---2.
---professor 테이블에서 교수의 이름과 부서번호를 출력하고 
---101 번 부서 중에서 이름이 "Audie Murphy" 교수에게
---비고란에 “BEST!”라고 출력하고 101번 학과의 "Audie Murphy" 교수 외에는 비고란에
---“GOOD!”을 출력하고 101번 교수가 아닐 경우는 비고란이 공란이 되도록 출력하세요.
-
-SELECT 
-    deptno,
-    name,
-DECODE(deptno, 101 , DECODE(name, 'Audie Murphy', 'BEST!' , 'GOOD!') , 'N/A' ) "비고란"
-FROM professor;
-
-
-
-
-
-
-
-
-
+SELECT
+grade ,
+DECODE(grade, 1, '저학년' , 2, '저학년' , 3 , '고학년' , 4 , '고학년') "학년" ,
+CASE grade
+    WHEN 1 THEN '저학년'
+    WHEN 2 THEN '저학년'
+    WHEN 3 THEN '고학년'
+    WHEN 4 THEN '고학년'
+END AS "학년구분" ,
+CASE
+    WHEN grade IN (1,2) THEN '저학년'
+    WHEN grade BETWEEN 3 AND 4 THEN '고학년'
+END 학년구분2
+FROM student;
 
 
 

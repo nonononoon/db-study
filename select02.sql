@@ -190,6 +190,125 @@ SELECT
     TO_CHAR(ROUND(SYSDATE),'YYYY-MM-DD HH24:MI:SS')
 FROM dual;
 
+SELECT
+ TO_CHAR(1234, '999999'),
+ TO_CHAR(1234, '099999'),
+ TO_CHAR(1234, '$99999'),
+ TO_CHAR(1234, '99999.99'),
+ TO_CHAR(1234, '99,999')
+FROM dual;
+
+
+SELECT ename , ename , TO_CHAR((sal*12)+comm , '99,999')
+FROM emp
+WHERE ename = 'ALLEN';
+
+
+
+--emp 테이블을 조회하여 comm 값을 가지고 있는 사람들의 empno , ename , hiredate,
+--총연봉,15% 인상 후 연봉을 아래 화면처럼 출력하세요.
+--단 총연봉은 (sal*12)+comm 으로 계산하고
+--아래 화면에서는 SAL 로 출력되었으며
+--15% 인상한 값은 총연봉의 15% 인상 값입니다.
+
+SELECT empno , ename , TO_CHAR(hiredate, 'YYYY-MM-DD') "HIREDATE" ,
+TO_CHAR((sal*12)+comm , '$99,999') "SAL" , 
+TO_CHAR((sal*12+comm)*1.15 , '$99,999') "15%인상" 
+FROM emp
+WHERE comm IS NOT NULL;
+
+SELECT 
+TO_DATE('2024-06-02') + 3,
+TO_DATE('2024/06/02') + 3, 
+TO_DATE('2024-06-02') + 3,
+LAST_DAY('2024-08-05') ,
+TO_DATE('24:06:02') + 3 ,
+TO_CHAR(SYSDATE, 'YYYY/MM/DD'),
+TO_DATE('2024-01-05', 'YYYY-MM-DD'),
+TO_DATE('2024,01,05', 'YYYY,MM,DD'),
+TO_DATE('12/10/20', 'MM/DD/YY') -- 12월10일20년도를 뜻함 
+FROM dual;
+
+SELECT 
+    sal,
+    comm,
+    sal*12+comm,  -- 숫자*12+null = null
+    sal*12+NVL(comm, 0) "연봉" -- null 값을 0으로 설정 
+FROM emp;
+
+
+SELECT 
+    DECODE(10, 10, '같다' , '다르다') ,
+    DECODE(10, 20, '같다' , 'NULL'),
+    DECODE(10, 20, '같다') , -- null 생략도 가능 
+    DECODE(10, 30, '30이다' , 40, '40이다' , 50 , '50이다' , '아니다'),
+    DECODE(10, 30, '30이다' , 40, '40이다' , 50 , '50이다' , null), 
+    -- 마지막에 null 적거나 생략도 가능함 
+    DECODE(10, 30, '30이다' , 40, '40이다' , 50 , '50이다')
+FROM dual;
+
+SELECT 
+    deptno, name,
+    DECODE(deptno, 101, '컴퓨터공학' , null)
+FROM professor;
+
+SELECT 
+    deptno, name,
+    DECODE(deptno, 101, '컴퓨터공학' , '기타학과')
+FROM professor;
+
+SELECT 
+    deptno, name,
+    DECODE(deptno, 101, '컴퓨터공학' , 102 , '멀티미디어'
+    , 103 , '소프트웨어' , 'ETC') DNAME, deptno
+FROM professor;
+
+
+--1.
+--professor 테이블에서 교수의 이름과 부서번호를 출력하고
+--101 번 부서 중에서 이름이 "Audie Murphy" 교수에게 "BEST!" 라고 출력하고
+--101번 부서 중에서 이름이 "Audie Murphy" 교수가 아닌 나머지에는 NULL 값을 출력하세요.
+--만약 101 번 외 다른 학과에 "Audie Murphy" 교수가 있어도 "BEST!" 가 출력되면 안됩니다.
+
+SELECT 
+    deptno,
+    name,
+DECODE(deptno, 101 , DECODE(name, 'Audie Murphy', 'BEST!' ) ) "DECODE"
+FROM professor;
+
+--2.
+--professor 테이블에서 교수의 이름과 부서번호를 출력하고 
+--101 번 부서 중에서 이름이 "Audie Murphy" 교수에게
+--비고란에 “BEST!”라고 출력하고 101번 학과의 "Audie Murphy" 교수 외에는 비고란에
+--“GOOD!”을 출력하고 101번 교수가 아닐 경우는 비고란이 공란이 되도록 출력하세요.
+
+SELECT 
+    deptno,
+    name,
+DECODE(deptno, 101 , DECODE(name, 'Audie Murphy', 'BEST!' , 'GOOD!') , 'N/A' ) "비고란"
+FROM professor;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

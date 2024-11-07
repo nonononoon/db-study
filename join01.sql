@@ -125,3 +125,7 @@ WHERE s.profno(+) = p.profno;
 -- 교수 profno 기준으로 학생 profno 이어 붙이겠다
 
 
+SELECT
+
+
+

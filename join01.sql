@@ -124,8 +124,34 @@ FROM student s , professor p
 WHERE s.profno(+) = p.profno;
 -- 교수 profno 기준으로 학생 profno 이어 붙이겠다
 
+-- 내사번 , 내이름, 내 상사의 사번, 상사의 이름
+SELECT e1.empno , e1.ename , e1.mgr, e2.empno , e2.ename 
+FROM emp e1 , emp e2
+WHERE e1.mgr = e2.empno;
 
-SELECT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

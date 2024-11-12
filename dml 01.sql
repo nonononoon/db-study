@@ -137,5 +137,30 @@ FROM dept4
 WHERE dcode=2001;
 
 
+-- 여러개를 동시에 삽입(저장) INSERT ALL
+INSERT ALL
+INTO tt02 VALUES (7, '이름7', null)
+INTO tt02 VALUES (7, '이름7', null)
+INTO tt02 VALUES (7, '이름7', null)
+INTO tt02 VALUES (7, '이름7', null)
+SELECT * FROM dual;
+
+--테이블복사
+--INSERT INTO tt02
+--SELECT 11, '샘플', SYSDATE FROM dual;
+
+INSERT INTO tt02
+SELECT deptno, loc, SYSDATE FROM dept;
+
+SELECT *
+FROM tt02;
+
+-- 데이터병합 MERGE
+
+MERGE INTO Table1
+USING Table2
+
+
+
 
 

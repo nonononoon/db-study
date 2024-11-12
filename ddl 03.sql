@@ -106,16 +106,38 @@ WHERE tname LIKE '%DEPT%';
 -- 테이블 이름 찾을때 
 
 
+-- 정석 대로 pk
+CREATE TABLE tt05
+(
+        id number PRIMARY KEY,
+        no number,
+        age number,
+);
+
+
+--  컬럼 두개를 합쳐서 pk  
+CREATE TABLE tt05
+(
+        id number,
+        no number,
+        age number,
+        CONSTRAINT tt05_pk PRIMARY KEY (id , no)
+);
+
+
+
+-- 이건 잘못된 예시 pk
+CREATE TABLE tt05
+(
+        id number PRIMARY KEY,
+        no number PRIMARY KEY,
+        age number,
+);
 
 
 
 
+                           
 
-
-
-
-
-
-
-
+                        
 
